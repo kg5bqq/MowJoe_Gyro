@@ -314,29 +314,25 @@ BNO08x_RVC_Data heading;
             	esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &outgoingReadings, sizeof(outgoingReadings));		//Send to MowJoe_Master
             	if (result == ESP_OK) {
             	  Serial.println("Sent with success");
-            	}
-            	else {
+            	} else {
             	  Serial.println("Error sending the data");
             	}
-///*
-//            	esp_err_t result2 = esp_now_send(broadcastAddress2, (uint8_t *) &outgoingReadings, sizeof(outgoingReadings));	//Send to MowJoe_MotorControl
-//            	if (result2 == ESP_OK) {
-//            	  Serial.println("Sent with success");
-//            	}
-//            	else {
-//            	  Serial.println("Error sending the data");
-//            	}
-//*/
-//
+
+            	esp_err_t result2 = esp_now_send(broadcastAddress2, (uint8_t *) &outgoingReadings, sizeof(outgoingReadings));	//Send to MowJoe_MotorControl
+            	if (result2 == ESP_OK) {
+            	  Serial.println("Sent with success");
+            	} else {
+            	  Serial.println("Error sending the data");
+            	}
+
 ////            	Serial.printf("SENT -> outgoingReadings.heading: %lf\n\r", outgoingReadings.heading);
-//            } else {
-//                digitalWrite(RED_LED_PIN, HIGH);
-//                digitalWrite(BLUE_LED_PIN, LOW);
-//                digitalWrite(GREEN_LED_PIN, LOW);
-//            }
-            vTaskDelay(50 / portTICK_RATE_MS); //Normal/default max sample rate (continious mode of HMC5883L) is 66ms.
+            } else {
+                digitalWrite(RED_LED_PIN, LOW);
+                digitalWrite(BLUE_LED_PIN, HIGH);
+                digitalWrite(GREEN_LED_PIN, LOW);
             }
-	  	  }
+            vTaskDelay(50 / portTICK_RATE_MS); //Normal/default max sample rate (continious mode of HMC5883L) is 66ms.
+          }
       } // End of while(1) loop
 
     //Should NEVER get here..
