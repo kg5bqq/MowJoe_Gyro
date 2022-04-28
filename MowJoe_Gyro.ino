@@ -251,7 +251,7 @@ BNO08x_RVC_Data heading;
 
 	  if (!rvc.read(&heading)) {
 	    // Data not available or parsable, keep trying
-		  vTaskDelay(50 / portTICK_RATE_MS);
+		  vTaskDelay(250 / portTICK_RATE_MS);
 	  } else {
 
 //	  Serial.print(heading.yaw);Serial.println(F(","));
@@ -331,7 +331,7 @@ BNO08x_RVC_Data heading;
                 digitalWrite(BLUE_LED_PIN, HIGH);
                 digitalWrite(GREEN_LED_PIN, LOW);
             }
-            vTaskDelay(50 / portTICK_RATE_MS); //Normal/default max sample rate (continious mode of HMC5883L) is 66ms.
+            vTaskDelay(250 / portTICK_RATE_MS); //Normal/default max sample rate (continious mode of HMC5883L) is 66ms.
           }
       } // End of while(1) loop
 
