@@ -251,8 +251,14 @@ BNO08x_RVC_Data heading;
 
 	  if (!rvc.read(&heading)) {
 	    // Data not available or parsable, keep trying
-		  vTaskDelay(250 / portTICK_RATE_MS);
+		  vTaskDelay(200 / portTICK_RATE_MS);
+//		  digitalWrite(RED_LED_PIN, LOW);
+//	      digitalWrite(GREEN_LED_PIN, LOW);
+//	      digitalWrite(BLUE_LED_PIN, HIGH);
 	  } else {
+//		  digitalWrite(RED_LED_PIN, LOW);
+//	      digitalWrite(GREEN_LED_PIN, HIGH);
+//	      digitalWrite(BLUE_LED_PIN, LOW);
 
 //	  Serial.print(heading.yaw);Serial.println(F(","));
 	  //Add 'magnetic north' offset for current location.
@@ -265,11 +271,11 @@ BNO08x_RVC_Data heading;
 	  //              Input = _position;//'Input comes out of the filter_heading() filter and goes to the PID
 
 
-	  if(corrected_yaw < 0)
+	  if(corrected_yaw < 0) {
 	  	_position = (360 + corrected_yaw);
-	  else
+	  } else {
 	  	_position = corrected_yaw;
-
+	  }
 
       outgoingReadings.bearing = heading.yaw;
       outgoingReadings.heading = _position;
@@ -280,8 +286,8 @@ BNO08x_RVC_Data heading;
 //	  Serial.print(heading.y_accel);Serial.print(F(","));
 //	  Serial.print(heading.z_accel);
 //	  Serial.println("");
-      digitalWrite(RED_LED_PIN, LOW);
-      digitalWrite(GREEN_LED_PIN, LOW);
+//      digitalWrite(RED_LED_PIN, LOW);
+//      digitalWrite(GREEN_LED_PIN, LOW);
 //
               // Correct for when signs are reversed.
 //              if(heading.yaw < 0)
@@ -331,7 +337,7 @@ BNO08x_RVC_Data heading;
                 digitalWrite(BLUE_LED_PIN, HIGH);
                 digitalWrite(GREEN_LED_PIN, LOW);
             }
-            vTaskDelay(250 / portTICK_RATE_MS); //Normal/default max sample rate (continious mode of HMC5883L) is 66ms.
+            vTaskDelay(200 / portTICK_RATE_MS); //Normal/default max sample rate (continious mode of HMC5883L) is 66ms.
           }
       } // End of while(1) loop
 
