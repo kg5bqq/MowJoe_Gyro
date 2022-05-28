@@ -119,7 +119,7 @@ int parse_command(char* cmd_sent)
 	   start_sending = true;
 	   if(user_command[1].indexOf("YES") >= 0) {
 		   Begin_Sample_Start_Time = user_command[2].toInt();
-		   Serial.printf("%s %s %d\n\r", user_command[0], user_command[1], Begin_Sample_Start_Time);
+//		   Serial.printf("%s %s %d\n\r", user_command[0], user_command[1], Begin_Sample_Start_Time);
 				start_sending = true;
 	   }
 
@@ -280,36 +280,12 @@ BNO08x_RVC_Data heading;
       outgoingReadings.bearing = heading.yaw;
       outgoingReadings.heading = _position;
 
-//	  Serial.print(heading.pitch);Serial.println(F(","));
-//	  Serial.print(heading.roll);Serial.println(F(","));
-//	  Serial.print(heading.x_accel);Serial.print(F(","));
-//	  Serial.print(heading.y_accel);Serial.print(F(","));
-//	  Serial.print(heading.z_accel);
-//	  Serial.println("");
-//      digitalWrite(RED_LED_PIN, LOW);
-//      digitalWrite(GREEN_LED_PIN, LOW);
-//
-              // Correct for when signs are reversed.
-//              if(heading.yaw < 0)
-//                corrected_yaw = heading.yaw += 2*PI;
-//
-//              // Check for wrap due to addition of declination.
-//              if(heading.yaw > 2*PI)
-//            	  corrected_yaw = heading.yaw -= 2*PI;
-
-
-     	  	  //Send it to the Filter.  _position will now contains the filtered collection of headings
-              //_position = nearbyint(corrected_yaw);  // Remove the decimal degrees (rounded out)
-
-
 
               Serial.printf("corrected_yaw = %lf\n\r",_position);
 
-              //
-//
-//            // Send message via ESP-NOW
+            // Send message via ESP-NOW
             outgoingReadings.sensorID = MOWJOE_GYRO;
-//
+
             ok_to_Send = start_sending;
 
             if(ok_to_Send == true) {
@@ -331,7 +307,6 @@ BNO08x_RVC_Data heading;
             	  Serial.println("Error sending the data");
             	}
 
-////            	Serial.printf("SENT -> outgoingReadings.heading: %lf\n\r", outgoingReadings.heading);
             } else {
                 digitalWrite(RED_LED_PIN, LOW);
                 digitalWrite(BLUE_LED_PIN, HIGH);
